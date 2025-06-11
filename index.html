@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Easy-D กรอกยอดรายวัน</title>
+  <style>
+    body {
+      font-family: "Sarabun", sans-serif;
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      font-size: 1.1rem;
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+    .msg {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .msg.success {
+      color: green;
+    }
+    .msg.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Easy-D กรอกยอดรายวัน</h1>
+
+  <form id="easyDForm">
+    <label for="date">วันที่</label>
+    <input type="date" id="date" name="date" required />
+
+    <label for="income">รายรับวันนี้ (บาท)</label>
+    <input type="number" id="income" name="income" min="0" step="0.01" required />
+
+    <label for="expense">รายจ่ายวันนี้ (บาท)</label>
+    <input type="number" id="expense" name="expense" min="0" step="0.01" required />
+
+    <label for="note">หมายเหตุ (ถ้ามี)</label>
+    <textarea id="note" name="note" rows="2"></textarea>
+
+    <button type="submit">บันทึกข้อมูล</button>
+  </form>
+
+  <div id="message" class="msg"></div>
+
+  <script>
+    // ตั้งค่านี้เป็น URL ของ Web App Script ของคุณที่ได้จากขั้นตอนก่อนหน้า
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXziL_zwkOQ3tw4MQNUv0ZNv1aZACCZA-u3A57gbNQiOxycLI4aCG8rDqnSoqgXj0OUA/exec';
+
+    const form = document.getElementById('easyDForm');
+    const messageEl = document.getElementById('message');
+    const dateInput = document.getElementById('date');
+
+    // ตั้งค่าวันที่เริ่มต้นเป็นวันนี้
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      messageEl.textContent = '';
+      messageEl.className = 'msg';
+
+      const data = {
+        date: dateInput.value,
+        income: parseFloat(form.income.value),
+        expense: parseFloat(form.expense.value),
+        note: form.note.value.trim(),
+      };
+
+      // ตรวจสอบข้อมูลก่อนส่ง (รายรับ-รายจ่าย >= 0)
+      if (data.income < 0 || data.expense < 0) {
+        messageEl.textContent = 'กรุณากรอกตัวเลขที่เป็นบวกสำหรับรายรับและรายจ่าย';
+        messageEl.classList.add('error');
+        return;
+      }
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+
+        if (result.status === 'success') {
+          messageEl.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+          messageEl.classList.add('success');
+          form.reset();
+          dateInput.value = today;  // รีเซ็ตวันที่กลับเป็นวันนี้
+        } else {
+          throw new Error(result.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+        }
+      } catch (error) {
+        messageEl.textContent = 'Error: ' + error.message;
+        messageEl.classList.add('error');
+      }
+    });
+  </script>
+</body>
+</html>
