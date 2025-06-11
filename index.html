@@ -65,13 +65,16 @@
             resize: vertical;
         }
 
-        /* เพิ่ม max-width เพื่อแก้ไขปัญหาความยาวส่วนเกินของ input บางประเภท */
-        input[type="date"],
+        /* แก้ไขปัญหาช่องวันที่ยาวเกินบน iOS */
+        input[type="date"] {
+            /* -webkit-appearance: none; /* หากต้องการลบไอคอนปฏิทินเริ่มต้นบน iOS ให้เปิดใช้งาน */
+            /* appearance: none; */
+            padding-right: 8px; /* ลด padding ด้านขวาเพื่อชดเชยพื้นที่ไอคอนปฏิทินของเบราว์เซอร์ */
+        }
+        /* เพื่อให้แน่ใจว่า input อื่นๆ ไม่ได้รับผลกระทบจาก padding-right ข้างต้น */
         input[type="number"],
-        input[type="text"], /* เผื่อในอนาคตมี input type อื่นๆ */
-        textarea {
-            max-width: 100%; /* ทำให้แน่ใจว่าไม่เกินขอบเขต */
-            /* หากยังพบปัญหา ลองพิจารณาใช้เฉพาะ max-width กับ input[type="date"] เท่านั้น */
+        input[type="text"] {
+            padding-right: 14px; /* กำหนด padding-right กลับไปเป็นค่าเดิมสำหรับ input ประเภทอื่น */
         }
 
 
