@@ -14,114 +14,92 @@
     }
 
     body {
-      font-family: 'Sarabun', sans-serif;
-      background: #f0f3f5;
-      margin: 0;
-      padding: 20px 15px;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
+      font-family: "Sarabun", sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f7f9f8;
+      color: #264653;
     }
-
-    .container {
-      background: white;
-      max-width: 420px;
-      width: 100%;
-      border-radius: 12px;
-      padding: 30px 25px 35px 25px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
     h1 {
-      margin: 0 0 25px;
-      font-weight: 700;
-      font-size: 1.8rem;
       text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
       color: #2a9d8f;
-      letter-spacing: 1px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
-
+    form {
+      background: white;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(42, 157, 143, 0.2);
+      transition: box-shadow 0.3s ease;
+    }
+    form:hover {
+      box-shadow: 0 6px 25px rgba(42, 157, 143, 0.35);
+    }
     label {
       display: block;
+      margin-top: 18px;
       font-weight: 600;
-      color: #444;
-      margin-bottom: 8px;
       font-size: 1rem;
+      color: #264653;
     }
-
-    input[type="date"],
-    input[type="number"],
-    textarea {
-    width: 100%;
-    max-width: 100%; /* เพิ่มบรรทัดนี้ */
-    padding: 10px 12px; /* ลด padding ลงเล็กน้อย */
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1.8px solid #d0d7de;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    resize: vertical;
-    font-weight: 400;
-    color: #333;
-    box-sizing: border-box; /* เพิ่มบรรทัดนี้ */
-  }
-
-
-    input[type="date"]:focus,
-    input[type="number"]:focus,
-    textarea:focus {
-      border-color: #2a9d8f;
-      outline: none;
-      box-shadow: 0 0 8px rgba(42, 157, 143, 0.35);
-    }
-
-    textarea {
-      min-height: 60px;
-      font-family: 'Sarabun', sans-serif;
-    }
-
-    button {
-      margin-top: 30px;
+    input, textarea {
       width: 100%;
-      padding: 14px 0;
-      background-color: #2a9d8f;
-      color: #fff;
+      padding: 10px 14px;
+      margin-top: 8px;
+      box-sizing: border-box;
+      font-size: 1rem;
+      border: 2px solid #a8dadc;
+      border-radius: 8px;
+      transition: border-color 0.25s ease;
+      font-weight: 400;
+      color: #264653;
+      background-color: #fefefe;
+      resize: vertical;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #2a9d8f;
+      background-color: #e0f2f1;
+      box-shadow: 0 0 8px rgba(42, 157, 143, 0.4);
+    }
+    button {
+      margin-top: 25px;
+      padding: 12px 0;
+      width: 100%;
       font-size: 1.2rem;
       font-weight: 700;
+      background-color: #2a9d8f;
+      color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 6px 12px rgba(42, 157, 143, 0.45);
+      box-shadow: 0 4px 8px rgba(42, 157, 143, 0.6);
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
     }
-
     button:hover:not(:disabled) {
-      background-color: #23807b;
-      box-shadow: 0 8px 18px rgba(35, 128, 123, 0.6);
+      background-color: #23857f;
+      box-shadow: 0 6px 14px rgba(35, 133, 127, 0.8);
     }
-
     button:disabled {
-      background-color: #bbb;
+      background-color: #9e9e9e;
+      cursor: not-allowed;
       box-shadow: none;
-      cursor: default;
     }
-
     .msg {
       margin-top: 20px;
       font-weight: 600;
       font-size: 1.1rem;
       text-align: center;
-      min-height: 28px;
       user-select: none;
-      letter-spacing: 0.3px;
     }
-
     .msg.success {
       color: #2a9d8f;
     }
-
     .msg.error {
-      color: #e63946;
+      color: #e76f51;
     }
 
     /* Responsive สำหรับมือถือเล็ก */
