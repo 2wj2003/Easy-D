@@ -1,197 +1,305 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Easy-D กรอกยอดรายวัน</title>
-  <style>
-    /* โหลดฟอนต์ Sarabun Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Easy-D กรอกยอดรายวัน</title>
+    <style>
+        /* โหลดฟอนต์ Sarabun Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
 
-    /* Reset เบื้องต้น */
-    * {
-      box-sizing: border-box;
-    }
+        /* Reset เบื้องต้น */
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: "Sarabun", sans-serif;
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background: #f7f9f8;
-      color: #264653;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: 700;
-      color: #2a9d8f;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-    form {
-      background: white;
-      padding: 25px 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(42, 157, 143, 0.2);
-      transition: box-shadow 0.3s ease;
-    }
-    form:hover {
-      box-shadow: 0 6px 25px rgba(42, 157, 143, 0.35);
-    }
-    label {
-      display: block;
-      margin-top: 18px;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #264653;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px 14px;
-      margin-top: 8px;
-      box-sizing: border-box;
-      font-size: 1rem;
-      border: 2px solid #a8dadc;
-      border-radius: 8px;
-      transition: border-color 0.25s ease;
-      font-weight: 400;
-      color: #264653;
-      background-color: #fefefe;
-      resize: vertical;
-    }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #2a9d8f;
-      background-color: #e0f2f1;
-      box-shadow: 0 0 8px rgba(42, 157, 143, 0.4);
-    }
-    button {
-      margin-top: 25px;
-      padding: 12px 0;
-      width: 100%;
-      font-size: 1.2rem;
-      font-weight: 700;
-      background-color: #2a9d8f;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(42, 157, 143, 0.6);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    button:hover:not(:disabled) {
-      background-color: #23857f;
-      box-shadow: 0 6px 14px rgba(35, 133, 127, 0.8);
-    }
-    button:disabled {
-      background-color: #9e9e9e;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-    .msg {
-      margin-top: 20px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-align: center;
-      user-select: none;
-    }
-    .msg.success {
-      color: #2a9d8f;
-    }
-    .msg.error {
-      color: #e76f51;
-    }
+        body {
+            font-family: "Sarabun", sans-serif;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 0 15px;
+            background: #f7f9f8;
+            color: #264653;
+        }
 
-    /* Responsive สำหรับมือถือเล็ก */
-    @media (max-width: 400px) {
-      .container {
-        padding: 25px 15px 30px 15px;
-        border-radius: 10px;
-      }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #2a9d8f;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
 
-      h1 {
-        font-size: 1.6rem;
-        margin-bottom: 20px;
-      }
+        form {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
 
-      button {
-        font-size: 1.1rem;
-        padding: 12px 0;
-        border-radius: 8px;
-      }
-    }
-  </style>
+        form:hover {
+            box-shadow: 0 6px 25px rgba(42, 157, 143, 0.35);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #264653;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            border: 2px solid #a8dadc;
+            border-radius: 8px;
+            transition: border-color 0.25s ease;
+            font-weight: 400;
+            color: #264653;
+            background-color: #fefefe;
+            resize: vertical;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2a9d8f;
+            background-color: #e0f2f1;
+            box-shadow: 0 0 8px rgba(42, 157, 143, 0.4);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 0;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(42, 157, 143, 0.6);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #23857f;
+            box-shadow: 0 6px 14px rgba(35, 133, 127, 0.8);
+        }
+
+        button:disabled {
+            background-color: #9e9e9e;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto; /* Removed from flexbox, now handled by flex */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            width: 80%; /* Could be more responsive */
+            max-width: 350px; /* Max width for larger screens */
+            text-align: center;
+            position: relative; /* Needed for close button positioning */
+            animation: fadeIn 0.3s ease-out; /* Simple fade-in animation */
+        }
+
+        .modal-content.success {
+            border: 2px solid #2a9d8f;
+            color: #2a9d8f;
+        }
+
+        .modal-content.error {
+            border: 2px solid #e76f51;
+            color: #e76f51;
+        }
+
+        .modal-message {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .modal-close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close-button:hover,
+        .modal-close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive สำหรับมือถือเล็ก */
+        @media (max-width: 400px) {
+            body {
+                margin: 20px auto;
+                padding: 0 10px;
+            }
+
+            form {
+                padding: 15px 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            button {
+                font-size: 1.1rem;
+                padding: 10px 0;
+                border-radius: 8px;
+            }
+
+            label {
+                margin-top: 12px;
+            }
+
+            .modal-content {
+                width: 90%; /* Adjust width for very small screens */
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
     <h1>Easy-D กรอกยอดรายวัน</h1>
 
     <form id="easyDForm">
-      <label for="date">วันที่</label>
-      <input type="date" id="date" name="date" required />
+        <label for="date">วันที่</label>
+        <input type="date" id="date" name="date" required />
 
-      <label for="income">รายรับวันนี้ (บาท)</label>
-      <input type="number" id="income" name="income" min="0" step="0.01" required />
+        <label for="income">รายรับวันนี้ (บาท)</label>
+        <input type="number" id="income" name="income" min="0" step="0.01" required />
 
-      <label for="expense">รายจ่ายวันนี้ (บาท)</label>
-      <input type="number" id="expense" name="expense" min="0" step="0.01" required />
+        <label for="expense">รายจ่ายวันนี้ (บาท)</label>
+        <input type="number" id="expense" name="expense" min="0" step="0.01" required />
 
-      <label for="note">หมายเหตุ (ถ้ามี)</label>
-      <textarea id="note" name="note" placeholder="ถ้ามีหมายเหตุเพิ่มเติม"></textarea>
+        <label for="note">หมายเหตุ (ถ้ามี)</label>
+        <textarea id="note" name="note" placeholder="ถ้ามีหมายเหตุเพิ่มเติม"></textarea>
 
-      <button type="submit">บันทึกข้อมูล</button>
+        <button type="submit">บันทึกข้อมูล</button>
     </form>
 
-    <div id="message" class="msg"></div>
-  </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close-button">&times;</span>
+            <p id="modalMessage" class="modal-message"></p>
+            <button id="modalOkButton" class="button">ตกลง</button>
+        </div>
+    </div>
 
-  <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxKjoUqJbGtRqhcT2SGFJGK5SMLvvHGxjAJnNpYQpNctOr-vmcES_LQYIQnM_eGeqckuA/exec';
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxKjoUqJbGtRqhcT2SGFJGK5SMLvvHGxjAJnNpYQpNctOr-vmcES_LQYIQnM_eGeqckuA/exec';
 
-    const form = document.getElementById('easyDForm');
-    const messageEl = document.getElementById('message');
-    const dateInput = document.getElementById('date');
+        const form = document.getElementById('easyDForm');
+        const dateInput = document.getElementById('date');
 
-    // ตั้งค่าวันที่เป็นวันนี้
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.value = today;
+        // Modal elements
+        const modal = document.getElementById('myModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeButton = document.querySelector('.modal-close-button');
+        const okButton = document.getElementById('modalOkButton');
+        const modalContent = document.querySelector('.modal-content');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      messageEl.textContent = '';
-      messageEl.className = 'msg';
 
-      const data = {
-        date: dateInput.value,
-        income: form.income.value,
-        expense: form.expense.value,
-        note: form.note.value.trim(),
-      };
+        // Set today's date
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
 
-      if (parseFloat(data.income) < 0 || parseFloat(data.expense) < 0) {
-        messageEl.textContent = 'กรุณากรอกตัวเลขที่เป็นบวกสำหรับรายรับและรายจ่าย';
-        messageEl.classList.add('error');
-        return;
-      }
-
-      try {
-        const params = new URLSearchParams(data).toString();
-        const res = await fetch(`${API_URL}?${params}`, { method: 'GET' });
-        const result = await res.json();
-
-        if (result.status === 'success') {
-          messageEl.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว';
-          messageEl.classList.add('success');
-          form.reset();
-          dateInput.value = today;
-        } else {
-          throw new Error(result.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+        // Function to show modal
+        function showModal(message, type) {
+            modalMessage.textContent = message;
+            modalContent.className = 'modal-content ' + type; // Add success or error class
+            modal.style.display = 'flex'; // Show the modal
         }
-      } catch (error) {
-        messageEl.textContent = 'Error: ' + error.message;
-        messageEl.classList.add('error');
-      }
-    });
-  </script>
+
+        // Function to hide modal
+        function hideModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking on the close button or OK button
+        closeButton.addEventListener('click', hideModal);
+        okButton.addEventListener('click', hideModal);
+
+        // Close modal when clicking outside of the modal content
+        window.addEventListener('click', (event) => {
+            if (event.target == modal) {
+                hideModal();
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                date: dateInput.value,
+                income: form.income.value,
+                expense: form.expense.value,
+                note: form.note.value.trim(),
+            };
+
+            if (parseFloat(data.income) < 0 || parseFloat(data.expense) < 0) {
+                showModal('กรุณากรอกตัวเลขที่เป็นบวกสำหรับรายรับและรายจ่าย', 'error');
+                return;
+            }
+
+            try {
+                const params = new URLSearchParams(data).toString();
+                const res = await fetch(`${API_URL}?${params}`, { method: 'GET' });
+                const result = await res.json();
+
+                if (result.status === 'success') {
+                    showModal('บันทึกข้อมูลเรียบร้อยแล้ว', 'success');
+                    form.reset();
+                    dateInput.value = today;
+                } else {
+                    throw new Error(result.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+                }
+            } catch (error) {
+                showModal('Error: ' + error.message, 'error');
+            }
+        });
+    </script>
 </body>
 </html>
