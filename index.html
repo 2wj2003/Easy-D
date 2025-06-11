@@ -52,16 +52,19 @@
     input[type="date"],
     input[type="number"],
     textarea {
-      width: 100%;
-      padding: 12px 15px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 1.8px solid #d0d7de;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      resize: vertical;
-      font-weight: 400;
-      color: #333;
-    }
+    width: 100%;
+    max-width: 100%; /* เพิ่มบรรทัดนี้ */
+    padding: 10px 12px; /* ลด padding ลงเล็กน้อย */
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1.8px solid #d0d7de;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+    font-weight: 400;
+    color: #333;
+    box-sizing: border-box; /* เพิ่มบรรทัดนี้ */
+  }
+
 
     input[type="date"]:focus,
     input[type="number"]:focus,
