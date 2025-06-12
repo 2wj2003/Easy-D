@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Easy-D บันทึกยอดรายวัน</title>
+    <title>Easy-D ยินดีต้อนรับ</title>
     <style>
-        /* โหลดฟอนต์ Sarabun Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
 
-        /* Reset เบื้องต้น */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,345 +15,117 @@
 
         body {
             font-family: "Sarabun", sans-serif;
-            background: linear-gradient(135deg, #e0f2f1 0%, #ccedeb 100%); /* ไล่สีอ่อนๆ */
+            background: linear-gradient(135deg, #e0f2f1 0%, #ccedeb 100%);
             color: #264653;
-            min-height: 100vh; /* เต็มความสูงหน้าจอ */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
             align-items: center;
-            padding: 20px 15px; /* ลด padding ด้านบน/ล่างสำหรับมือถือ */
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+        .welcome-container {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 20px; /* โค้งมนมากขึ้น */
+            box-shadow: 0 10px 30px rgba(42, 157, 143, 0.3); /* เงาที่ชัดเจนขึ้น */
+            width: 100%;
+            max-width: 450px; /* กว้างขึ้นเล็กน้อย */
+            transform: translateY(-10px); /* เลื่อนขึ้นเล็กน้อยเพื่อความสวยงาม */
+            animation: fadeInSlide 0.6s ease-out forwards; /* เพิ่ม animation */
+            opacity: 0; /* ซ่อนไว้ก่อน animation */
+        }
+
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 25px;
+            font-size: 2.2rem; /* ขนาดใหญ่ขึ้น */
             font-weight: 700;
             color: #2a9d8f;
-            text-shadow: 0 2px 5px rgba(42, 157, 143, 0.2); /* เงาที่ชัดเจนขึ้น */
-            font-size: 1.8rem; /* ปรับขนาดสำหรับมือถือ */
-            padding-top: 10px; /* เพิ่มช่องว่างด้านบน */
+            text-shadow: 0 3px 6px rgba(42, 157, 143, 0.3);
+            margin-bottom: 20px;
         }
 
-        form {
-            background: white;
-            padding: 25px 20px; /* เพิ่ม padding ด้านใน */
-            border-radius: 16px; /* ขอบโค้งมนขึ้น */
-            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.25); /* เงาที่ลึกขึ้น */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 100%;
-            max-width: 380px; /* จำกัดความกว้างสูงสุด */
+        p {
+            font-size: 1.1rem;
+            color: #457b9d;
+            margin-bottom: 30px; /* เพิ่มระยะห่างกับปุ่ม */
+            line-height: 1.5;
         }
 
-        form:hover {
-            transform: translateY(-3px); /* ยกฟอร์มขึ้นเล็กน้อยเมื่อ Hover */
-            box-shadow: 0 12px 30px rgba(42, 157, 143, 0.35);
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 18px; /* เพิ่มระยะห่างระหว่างปุ่ม */
         }
 
-        label {
-            display: block;
-            margin-top: 20px; /* เพิ่มระยะห่างระหว่าง Label */
-            margin-bottom: 8px; /* เพิ่มระยะห่างกับ Input */
-            font-weight: 600;
-            font-size: 0.95rem; /* ขนาดเล็กลงเล็กน้อย */
-            color: #264653;
-            text-transform: uppercase; /* ตัวพิมพ์ใหญ่ */
-            letter-spacing: 0.5px; /* เพิ่มระยะห่างระหว่างตัวอักษร */
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px 15px; /* เพิ่ม padding */
-            font-size: 1.05rem; /* ขนาดใหญ่ขึ้นเล็กน้อย */
-            border: 1px solid #a8dadc; /* ขอบบางลง */
-            border-radius: 10px; /* ขอบโค้งมนขึ้น */
-            transition: all 0.25s ease;
-            font-weight: 400;
-            color: #264653;
-            background-color: #fefefe;
-            -webkit-appearance: none; /* ลบสไตล์เริ่มต้นของเบราว์เซอร์สำหรับ iOS */
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        input[type="number"] {
-            /* สำหรับ iOS ให้มีพื้นที่สำหรับลูกศรขึ้นลง */
-            padding-right: 40px; 
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #2a9d8f;
-            background-color: #e0f2f1;
-            box-shadow: 0 0 10px rgba(42, 157, 143, 0.5); /* เงาชัดเจนขึ้น */
-        }
-
-        textarea {
-            min-height: 80px; /* กำหนดความสูงเริ่มต้น */
-            max-height: 150px; /* กำหนดความสูงสูงสุด */
-            resize: vertical;
-        }
-
-        button {
-            margin-top: 30px; /* เพิ่มระยะห่างด้านบน */
-            padding: 14px 0; /* เพิ่ม padding */
-            width: 100%;
-            font-size: 1.25rem; /* ขนาดใหญ่ขึ้น */
-            font-weight: 700;
-            background-color: #2a9d8f;
-            color: white;
-            border: none;
-            border-radius: 12px; /* ขอบโค้งมนขึ้น */
-            cursor: pointer;
-            box-shadow: 0 6px 15px rgba(42, 157, 143, 0.5); /* เงาที่ลึกขึ้น */
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            letter-spacing: 0.8px;
-        }
-
-        button:hover:not(:disabled) {
-            background-color: #23857f;
-            transform: translateY(-2px); /* ยกปุ่มขึ้นเล็กน้อย */
-            box-shadow: 0 8px 20px rgba(35, 133, 127, 0.7);
-        }
-
-        button:active:not(:disabled) {
-            transform: translateY(1px); /* กดจมลงไปเล็กน้อย */
-            box-shadow: 0 4px 10px rgba(35, 133, 127, 0.6);
-        }
-
-        button:disabled {
-            background-color: #a7d9d7; /* สีเทาอ่อนลง */
-            cursor: not-allowed;
-            box-shadow: none;
-            opacity: 0.7;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5); /* ทึบขึ้นเล็กน้อย */
-            display: flex; /* กำหนดให้เป็น flex เพื่อจัดกึ่งกลาง */
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(3px); /* เพิ่มเบลอพื้นหลัง */
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            padding: 30px 25px; /* เพิ่ม padding */
-            border-radius: 16px; /* ขอบโค้งมนขึ้น */
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4); /* เงาที่ลึกขึ้น */
-            width: 90%; /* กว้างขึ้นสำหรับมือถือ */
-            max-width: 380px;
-            text-align: center;
-            position: relative;
-            animation: fadeInScale 0.3s ease-out; /* เปลี่ยนชื่อ Animation */
-        }
-
-        .modal-content.success {
-            border: 3px solid #2a9d8f; /* ขอบหนาขึ้น */
-            color: #2a9d8f;
-        }
-
-        .modal-content.error {
-            border: 3px solid #e76f51; /* ขอบหนาขึ้น */
-            color: #e76f51;
-        }
-
-        .modal-message {
+        .menu-button {
+            display: block; /* ทำให้ปุ่มอยู่คนละบรรทัด */
+            padding: 18px 25px; /* เพิ่ม padding */
             font-size: 1.3rem; /* ขนาดใหญ่ขึ้น */
             font-weight: 600;
-            margin-bottom: 25px; /* เพิ่มระยะห่าง */
-            line-height: 1.4; /* เพิ่มระยะห่างระหว่างบรรทัด */
-        }
-
-        .modal-close-button {
-            color: #ccc; /* สีจางลง */
-            font-size: 32px; /* ขนาดใหญ่ขึ้น */
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        .modal-close-button:hover,
-        .modal-close-button:focus {
-            color: #888; /* เข้มขึ้นเมื่อ hover */
-            text-decoration: none;
-        }
-
-        /* Modal OK Button */
-        #modalOkButton {
-            margin-top: 15px; /* ลดระยะห่างด้านบน */
-            padding: 10px 0; /* ลด padding */
-            font-size: 1.1rem; /* ขนาดเล็กลง */
+            color: white;
             background-color: #2a9d8f;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(42, 157, 143, 0.4);
+            border: none;
+            border-radius: 12px; /* โค้งมนขึ้น */
+            text-decoration: none; /* ลบเส้นใต้ */
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.4); /* เงาปุ่ม */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            letter-spacing: 0.5px;
         }
 
-        #modalOkButton:hover {
+        .menu-button:hover {
             background-color: #23857f;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 15px rgba(35, 133, 127, 0.6);
+            transform: translateY(-3px); /* ยกปุ่มขึ้นเล็กน้อย */
+            box-shadow: 0 8px 20px rgba(35, 133, 127, 0.6);
         }
 
-
-        /* Animations */
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        .menu-button:active {
+            transform: translateY(1px); /* กดจมลงไป */
+            box-shadow: 0 3px 10px rgba(35, 133, 127, 0.5);
         }
 
-        /* Responsive สำหรับมือถือเล็กพิเศษ */
-        @media (max-width: 360px) {
-            h1 {
-                font-size: 1.7rem;
-            }
-            form {
-                padding: 20px 15px;
-            }
-            label {
-                font-size: 0.9rem;
-            }
-            input, textarea {
-                font-size: 1rem;
-                padding: 10px 12px;
-            }
-            button {
-                font-size: 1.15rem;
-                padding: 12px 0;
-            }
-            .modal-content {
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .welcome-container {
                 padding: 25px 20px;
+                border-radius: 16px;
             }
-            .modal-message {
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+            p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+            .menu-button {
+                padding: 15px 20px;
                 font-size: 1.15rem;
+                border-radius: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Easy-D บันทึกยอดรายวัน</h1>
-
-    <form id="easyDForm">
-        <label for="date">วันที่</label>
-        <input type="date" id="date" name="date" required />
-
-        <label for="income">รายรับวันนี้ (บาท)</label>
-        <input type="number" id="income" name="income" min="0" step="0.01" inputmode="decimal" required />
-
-        <label for="expense">รายจ่ายวันนี้ (บาท)</label>
-        <input type="number" id="expense" name="expense" min="0" step="0.01" inputmode="decimal" required />
-
-        <label for="note">หมายเหตุ (ถ้ามี)</label>
-        <textarea id="note" name="note" placeholder="บันทึกรายละเอียดเพิ่มเติม..."></textarea>
-
-        <button type="submit" id="submitButton">บันทึกข้อมูล</button>
-    </form>
-
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close-button">&times;</span>
-            <p id="modalMessage" class="modal-message"></p>
-            <button id="modalOkButton" class="button">ตกลง</button>
+    <div class="welcome-container">
+        <h1>Easy-D</h1>
+        <p>ยินดีต้อนรับสู่ Easy-D ระบบบันทึกและสรุปยอดรายวันของคุณ จัดการธุรกิจของคุณให้ง่ายขึ้น!</p>
+        <div class="menu-buttons">
+            <a href="add_sum.html" class="menu-button">บันทึกยอดขาย / ค่าใช้จ่าย</a>
+            <a href="summary.html" class="menu-button">ดูสรุปผลทั้งหมด</a>
         </div>
     </div>
-
-    <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycbxKjoUqJbGtRqhcT2SGFJGK5SMLvvHGxjAJnNpYQpNctOr-vmcES_LQYIQnM_eGeqckuA/exec'; // ตรวจสอบให้แน่ใจว่าเป็น URL ล่าสุดของคุณ
-
-        const form = document.getElementById('easyDForm');
-        const dateInput = document.getElementById('date');
-        const submitButton = document.getElementById('submitButton');
-
-        // Modal elements
-        const modal = document.getElementById('myModal');
-        const modalMessage = document.getElementById('modalMessage');
-        const closeButton = document.querySelector('.modal-close-button');
-        const okButton = document.getElementById('modalOkButton');
-        const modalContent = document.querySelector('.modal-content');
-
-        // Set today's date
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.value = today;
-
-        // Function to show modal
-        function showModal(message, type) {
-            modalMessage.textContent = message;
-            // ลบ class เก่าออกก่อนเสมอ
-            modalContent.classList.remove('success', 'error'); 
-            modalContent.classList.add(type); // Add success or error class
-            modal.style.display = 'flex'; // แสดง modal โดยใช้ flexbox
-        }
-
-        // Function to hide modal
-        function hideModal() {
-            modal.style.display = 'none';
-        }
-
-        // Close modal when clicking on the close button or OK button
-        closeButton.addEventListener('click', hideModal);
-        okButton.addEventListener('click', hideModal);
-
-        // Close modal when clicking outside of the modal content
-        window.addEventListener('click', (event) => {
-            if (event.target == modal) {
-                hideModal();
-            }
-        });
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            submitButton.disabled = true; // Disable button to prevent multiple submissions
-            submitButton.textContent = 'กำลังบันทึก...'; // Change button text
-
-            const data = {
-                date: dateInput.value,
-                income: parseFloat(form.income.value), // Parse to float directly
-                expense: parseFloat(form.expense.value), // Parse to float directly
-                note: form.note.value.trim(),
-            };
-
-            // Basic client-side validation
-            if (isNaN(data.income) || isNaN(data.expense)) {
-                showModal('กรุณากรอกตัวเลขสำหรับรายรับและรายจ่าย', 'error');
-                submitButton.disabled = false;
-                submitButton.textContent = 'บันทึกข้อมูล';
-                return;
-            }
-            if (data.income < 0 || data.expense < 0) {
-                showModal('กรุณากรอกตัวเลขที่เป็นบวกสำหรับรายรับและรายจ่าย', 'error');
-                submitButton.disabled = false;
-                submitButton.textContent = 'บันทึกข้อมูล';
-                return;
-            }
-
-            try {
-                const params = new URLSearchParams(data).toString();
-                const res = await fetch(`${API_URL}?${params}`, { method: 'GET' });
-                const result = await res.json();
-
-                if (result.status === 'success') {
-                    showModal('บันทึกข้อมูลเรียบร้อยแล้ว!', 'success');
-                    form.reset();
-                    dateInput.value = today; // Reset date to today after successful submission
-                } else {
-                    throw new Error(result.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
-                }
-            } catch (error) {
-                showModal('เกิดข้อผิดพลาด: ' + error.message, 'error');
-            } finally {
-                submitButton.disabled = false; // Re-enable button
-                submitButton.textContent = 'บันทึกข้อมูล'; // Reset button text
-            }
-        });
-    </script>
 </body>
 </html>
